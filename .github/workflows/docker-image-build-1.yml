@@ -17,7 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Check for Dockerfile
+        run: |
+          if [ -f "docker1/Dockerfile" ]; then
+            echo "Dockerfile found"
+            export BUILD_DOCKER=true
+          else
+            echo "Dockerfile not found"
+            export BUILD_DOCKER=false
+          fi
       - name: Build the Docker image
+        if: env.BUILD_DOCKER == 'true'
         run: |
           cd docker1
           docker build . --file Dockerfile --tag image1:${{ github.sha }}
