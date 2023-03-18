@@ -1,5 +1,5 @@
 ---
-name: Docker Image CI
+name: Docker Image Build Test - docker1
 on:
   push:
     branches:
