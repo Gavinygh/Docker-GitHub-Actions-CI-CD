@@ -1,4 +1,4 @@
-# GitHub Actions Practice Repo
+# Docker + GitHub Actions CI/CD process
 
  - Branch protection enforced, all changes must be submit through Pull Request. 
 
