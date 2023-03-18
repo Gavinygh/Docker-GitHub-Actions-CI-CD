@@ -28,6 +28,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: test-repo-1
         run: |
+          cd docker1
           docker build . --file Dockerfile --tag image1:${{ github.sha }}
           docker run image1:${{ github.sha }}
           docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
