@@ -21,19 +21,13 @@ jobs:
         run: |
           if [ -f "docker3/Dockerfile" ]; then
             echo "Dockerfile found"
-            echo "BUILD_DOCKER=true" >> $GITHUB_ENV
+            echo "BUILD_DOCKER=true" >> "$GITHUB_ENV"
           else
             echo "Dockerfile not found"
-            echo "BUILD_DOCKER=false" >> $GITHUB_ENV
+            echo "BUILD_DOCKER=false" >> "$GITHUB_ENV"
           fi
-
-  build:
-    runs-on: ubuntu-latest
-    needs: check_dockerfile
-    if: env.BUILD_DOCKER == 'true'
-    steps:
-      - uses: actions/checkout@v3
       - name: Build the Docker image
+        if: env.BUILD_DOCKER == 'true'
         run: |
           cd docker3
           docker build . --file Dockerfile --tag image3:${{ github.sha }}
