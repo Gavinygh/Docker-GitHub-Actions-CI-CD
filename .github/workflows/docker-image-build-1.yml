@@ -27,7 +27,7 @@ jobs:
             export BUILD_DOCKER='false'
           fi
       - name: Build the Docker image
-        if: env.BUILD_DOCKER == 'true'
+        if: ${{ env.BUILD_DOCKER }} == 'true'
         run: |
           cd docker1
           docker build . --file Dockerfile --tag image1:${{ github.sha }}
