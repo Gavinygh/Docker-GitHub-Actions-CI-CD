@@ -1,0 +1,24 @@
+---
+name: Docker Image CI
+on:
+  push:
+    branches:
+      - "*"
+    paths:
+      - "docker3/**"
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - "docker3/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: |
+          cd docker3
+          docker build . --file Dockerfile --tag image1:${{ github.sha }}
+          docker run image1:${{ github.sha }}

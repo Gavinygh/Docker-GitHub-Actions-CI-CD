@@ -9,6 +9,10 @@ def hash(i):
 
 if __name__ == "__main__":
     st = time.time()
+    print("STARTED")
+    print(datetime.fromtimestamp(st))
     hash(1000)
     et = time.time()
     print(et-st)
+    print(datetime.fromtimestamp(et))
+    print("ENDED")
