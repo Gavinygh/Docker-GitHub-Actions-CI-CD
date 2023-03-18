@@ -5,21 +5,20 @@ on:
     branches:
       - "*"
     paths:
-      - /docker1
+      - "docker1/**"
   pull_request:
     branches:
       - "*"
     paths:
-      - /docker1
-    base:
-      - main
+      - "docker1/**"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        working-directory: /docker1
         run: |
+          cd docker1
           docker build . --file Dockerfile --tag image1:${{ github.sha }}
           docker run image1:${{ github.sha }}
