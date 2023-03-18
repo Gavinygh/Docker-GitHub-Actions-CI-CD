@@ -1,3 +1,3 @@
 # Docker 1
 
-=> ECR
+=> ECR repo: test-repo-1
