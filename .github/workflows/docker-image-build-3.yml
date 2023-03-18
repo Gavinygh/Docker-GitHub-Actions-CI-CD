@@ -1,0 +1,34 @@
+name: Docker Image Build Test - docker3
+on:
+  push:
+    branches:
+      - "*"
+    paths:
+      - "docker3/**"
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - "docker3/**"
+
+jobs:
+  check_dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check for Dockerfile
+        id: check_dockerfile
+        run: |
+          if [ -f "docker3/Dockerfile" ]; then
+            echo "Dockerfile found"
+            echo "BUILD_DOCKER=true" >> "$GITHUB_ENV"
+          else
+            echo "Dockerfile not found"
+            echo "BUILD_DOCKER=false" >> "$GITHUB_ENV"
+          fi
+      - name: Build the Docker image
+        if: env.BUILD_DOCKER == 'true'
+        run: |
+          cd docker3
+          docker build . --file Dockerfile --tag image3:${{ github.sha }}
+          docker run image3:${{ github.sha }}
