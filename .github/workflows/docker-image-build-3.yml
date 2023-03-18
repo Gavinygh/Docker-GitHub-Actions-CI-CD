@@ -21,16 +21,16 @@ jobs:
         run: |
           if [ -f "docker3/Dockerfile" ]; then
             echo "Dockerfile found"
-            echo "::set-output name=build_docker::true"
+            echo "BUILD_DOCKER=true" >> $GITHUB_ENV
           else
             echo "Dockerfile not found"
-            echo "::set-output name=build_docker::false"
+            echo "BUILD_DOCKER=false" >> $GITHUB_ENV
           fi
 
   build:
     runs-on: ubuntu-latest
     needs: check_dockerfile
-    if: ${{ needs.check_dockerfile.outputs.build_docker }} == 'true'
+    if: ${{ env.BUILD_DOCKER }} == 'true'
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
