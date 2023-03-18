@@ -21,10 +21,10 @@ jobs:
         run: |
           if [ -f "docker2/Dockerfile" ]; then
             echo "Dockerfile found"
-            export BUILD_DOCKER='true'
+            echo "BUILD_DOCKER=true" >> $GITHUB_ENV
           else
             echo "Dockerfile not found"
-            export BUILD_DOCKER='false'
+            echo "BUILD_DOCKER=false" >> $GITHUB_ENV
           fi
       - name: Build the Docker image
         if: ${{ env.BUILD_DOCKER }} == 'true'
