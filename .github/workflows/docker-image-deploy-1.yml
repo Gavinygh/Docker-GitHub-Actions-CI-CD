@@ -31,6 +31,6 @@ jobs:
           cd docker1
           docker build . --file Dockerfile --tag image1:${{ github.sha }}
           docker run image1:${{ github.sha }}
-          docker tag $ECR_REPOSITORY:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker tag image1:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
